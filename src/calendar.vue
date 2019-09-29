@@ -270,31 +270,31 @@
 import calendar from './calendar.js'
 export default {
     props: {
-        // 多选模式
+        // Multiple selection mode
         multi: {
             type: Boolean,
             default: false
         },
-        // 范围模式
+        // Range mode
         range:{
             type: Boolean,
             default: false
         },
-        // 默认日期
+        // Default date
         value: {
             type: Array,
             default: function(){
                 return []
             }
         },
-        // 开始选择日期
+        // Start selecting date
         begin:  {
             type: Array,
             default: function(){
                 return []
             }
         },
-        // 结束选择日期
+        // End selection date
         end:  {
             type: Array,
             default: function(){
@@ -302,39 +302,41 @@ export default {
             }
         },
 
-        // 是否小于10补零
+        // Is it less than 10 zero padding?
         zero:{
             type: Boolean,
             default: false
         },
-        // 屏蔽的日期
+        // Shielded date
         disabled:{
             type: Array,
             default: function(){
                 return []
             }
         },
-        // 是否显示农历
+        // Whether to display the lunar calendar
         lunar: {
             type: Boolean,
             default: false
         },
 
-        // 自定义星期名称
+        // weekday names
         weeks: {
             type: Array,
             default:function(){
-                return window.navigator.language.toLowerCase() == "zh-cn"?['日', '一', '二', '三', '四', '五', '六']:['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+                // return window.navigator.language.toLowerCase() == "zh-cn"?['日', '一', '二', '三', '四', '五', '六']:['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+                return window.navigator.language.toLowerCase() == "de-de"?['So', 'Mon', 'Die', 'Mi', 'Do', 'Fr', 'Sa']:['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
             }
         },
-        // 自定义月份
+        // monthnames
         months:{
             type: Array,
             default:function(){
-                return window.navigator.language.toLowerCase() == "zh-cn"?['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月']:['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+                // return window.navigator.language.toLowerCase() == "zh-cn"?['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月']:['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+                return window.navigator.language.toLowerCase() == "zh-cn"?['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember']:['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
             }
         },
-        // 自定义事件
+        // Custom event
         events:  {
             type: Object,
             default: function(){
@@ -354,34 +356,53 @@ export default {
             today: [],
             festival:{
                 lunar:{
-                    "1-1":"春节",
-                    "1-15":"元宵节",
-                    "2-2":"龙头节",
-                    "5-5":"端午节",
-                    "7-7":"七夕节",
-                    "7-15":"中元节",
-                    "8-15":"中秋节",
-                    "9-9":"重阳节",
-                    "10-1":"寒衣节",
-                    "10-15":"下元节",
-                    "12-8":"腊八节",
-                    "12-23":"祭灶节",
+                    "1-1":"Chinese New Year",
+                    "1-15":"Lantern Festival",
+                    "2-2":"Faucet festival",
+                    "5-5":"Dragon Boat Festival",
+                    "7-7":"Qixi Festival",
+                    "7-15":"Zhongyuan Festival",
+                    "8-15":"Mid-Autumn Festival",
+                    "9-9":"Double Ninth Festival",
+                    "10-1":"Cold clothes festival",
+                    "10-15":"Lower Yuan Festival",
+                    "12-8":"Laba Festival",
+                    "12-23":"Jizao Festival",
                 },
                 gregorian:{
-                    "1-1":"元旦",
-                    "2-14":"情人节",
-                    "3-8":"妇女节",
-                    "3-12":"植树节",
-                    "4-5":"清明节",
-                    "5-1":"劳动节",
-                    "5-4":"青年节",
-                    "6-1":"儿童节",
-                    "7-1":"建党节",
-                    "8-1":"建军节",
-                    "9-10":"教师节",
-                    "10-1":"国庆节",
-                    "12-24":"平安夜",
-                    "12-25":"圣诞节",
+                    // "1-1":"New years",
+                    // "2-14":"Valentine's Day",
+                    // "3-8":"Women's Day",
+                    // "3-12":"Arbor Day",
+                    // "4-5":"Ching Ming Festival",
+                    // "5-1":"Labor day",
+                    // "5-4":"Youth festival",
+                    // "6-1":"Children's day",
+                    // "7-1":"Party building festival",
+                    // "8-1":"Army Day",
+                    // "9-10":"Teachers' Day",
+                    // "10-1":"National Day",
+                    // "12-24":"Christmas Eve",
+                    // "12-25":"Christmas",
+                    // https://www.feiertage-deutschland.de/2019/
+                    "1-1":"Neujahr",
+                    "1-6":"Heilige Drei Könige (BW,BY,ST)",
+                    "3-8":"Frauentag",
+                    "4-18":"Gründonnerstag (BW)",
+                    "4-19":"Karfreitag",
+                    "4-22":"Ostermontag",
+                    "5-1":"Tag der Arbeit",
+                    "5-30":"Christi Himmelfahrt",
+                    "6-10":"Pfingstmontag",
+                    "6-20":"Fronleichnam (BW,BY,HE,NW,RP,SL,SN,TH)",
+                    "8-15":"Mariä Himmelfahrt (BY,SL)",
+                    "9-20":"Weltkindertag (TH)",
+                    "10-3":"Tag der Deutschen Einheit",
+                    "10-31":"Reformationstag (BB,HB,HH,MV,NI,SH,SN,ST,TH)",
+                    "11-1":"Allerheiligen (BW,BY,NW,RP,SL)",
+                    "11-20":"Buss- und Bettag (BY,SN)",
+                    "12-25":"1. Weihnachtstag",
+                    "12-26":"2. Weihnachtstag",
                 },
             },
             rangeBegin:[],
@@ -406,7 +427,7 @@ export default {
             this.month = now.getMonth()
             this.day = now.getDate()
             if (this.value.length>0) {
-                if (this.range) { //范围
+                if (this.range) { //range
                     this.year = parseInt(this.value[0][0])
                     this.month = parseInt(this.value[0][1]) - 1
                     this.day = parseInt(this.value[0][2]) 
@@ -417,12 +438,12 @@ export default {
 
                     this.rangeBegin = [this.year, this.month,this.day]
                     this.rangeEnd = [year2, month2 , day2]
-                }else if(this.multi){//多选
+                }else if(this.multi){//Multiple selection
                     this.multiDays=this.value;
                     this.year = parseInt(this.value[0][0])
                     this.month = parseInt(this.value[0][1]) - 1
                     this.day = parseInt(this.value[0][2]) 
-                }else{ //单选
+                }else{ //Radio
                     this.year = parseInt(this.value[0])
                     this.month = parseInt(this.value[1]) - 1
                     this.day = parseInt(this.value[2]) 
@@ -430,25 +451,25 @@ export default {
             }
             this.render(this.year, this.month)
         },
-        // 渲染日期
+        // Render date
         render(y, m) {
-            let firstDayOfMonth = new Date(y, m, 1).getDay()         //当月第一天
-            let lastDateOfMonth = new Date(y, m + 1, 0).getDate()    //当月最后一天
-            let lastDayOfLastMonth = new Date(y, m, 0).getDate()     //最后一月的最后一天
+            let firstDayOfMonth = new Date(y, m, 1).getDay()         //First day of the month
+            let lastDateOfMonth = new Date(y, m + 1, 0).getDate()    //The last day of the month
+            let lastDayOfLastMonth = new Date(y, m, 0).getDate()     //The last day of the last month
             this.year = y
             let seletSplit = this.value
             let i, line = 0,temp = [],nextMonthPushDays = 1
             for (i = 1; i <= lastDateOfMonth; i++) {
-                let day = new Date(y, m, i).getDay() //返回星期几（0～6）
+                let day = new Date(y, m, i).getDay() //Return the day of the week（0～6）
                 let k
-                // 第一行
+                // first row
                 if (day == 0) {
                     temp[line] = []
                 } else if (i == 1) {
                     temp[line] = []
                     k = lastDayOfLastMonth - firstDayOfMonth + 1
                     for (let j = 0; j < firstDayOfMonth; j++) {
-                        // console.log("第一行",lunarYear,lunarMonth,lunarValue,lunarInfo)
+                        // console.log("first row",lunarYear,lunarMonth,lunarValue,lunarInfo)
                         temp[line].push(Object.assign(
                             {day: k,disabled: true},
                             this.getLunarInfo(this.computedPrevYear(),this.computedPrevMonth(true),k),
@@ -459,8 +480,8 @@ export default {
                 }
        
                 
-                if (this.range) { // 范围
-                    // console.log("日期范围",this.getLunarInfo(this.year,this.month+1,i))
+                if (this.range) { // range
+                    // console.log("Date range",this.getLunarInfo(this.year,this.month+1,i))
                     let options = Object.assign(
                         {day: i},
                         this.getLunarInfo(this.year,this.month+1,i),
@@ -488,9 +509,9 @@ export default {
                         }
                     }
                     temp[line].push(options)
-                }else if(this.multi){//多选
+                }else if(this.multi){//Multiple selection
                     let options
-                    // 判断是否选中
+                    // Determine whether it is selected
                     if(this.value.filter(v => {return this.year === v[0] && this.month === v[1]-1 && i === v[2] }).length>0 ){
                         options = Object.assign({day: i,selected:true},this.getLunarInfo(this.year,this.month+1,i),this.getEvents(this.year,this.month+1,i))
                     }else{
@@ -511,15 +532,15 @@ export default {
                     }
                     
                     temp[line].push(options)
-                } else { // 单选
+                } else { // Radio
                      // console.log(this.lunar(this.year,this.month,i));
                     
                     let chk = new Date()
                     let chkY = chk.getFullYear()
                     let chkM = chk.getMonth()
-                    // 匹配上次选中的日期
+                    // Match the last selected date
                     if (parseInt(seletSplit[0]) == this.year && parseInt(seletSplit[1]) - 1 == this.month && parseInt(seletSplit[2]) == i) {
-                        // console.log("匹配上次选中的日期",lunarYear,lunarMonth,lunarValue,lunarInfo)
+                        // console.log("Match the last selected date",lunarYear,lunarMonth,lunarValue,lunarInfo)
                         temp[line].push(Object.assign(
                             {day: i,selected: true},
                             this.getLunarInfo(this.year,this.month+1,i),
@@ -527,10 +548,10 @@ export default {
                         ))
                         this.today = [line, temp[line].length - 1]
                     }
-                     // 没有默认值的时候显示选中今天日期
+                     // Show today date when there is no default value
                     else if (chkY == this.year && chkM == this.month && i == this.day && this.value == "") {
 
-                        // console.log("今天",lunarYear,lunarMonth,lunarValue,lunarInfo)
+                        // console.log("today",lunarYear,lunarMonth,lunarValue,lunarInfo)
                         temp[line].push(Object.assign(
                             {day: i,selected: true},
                             this.getLunarInfo(this.year,this.month+1,i),
@@ -538,8 +559,8 @@ export default {
                         ))
                         this.today = [line, temp[line].length - 1]
                     }else{
-                        // 普通日期
-                        // console.log("设置可选范围",i,lunarYear,lunarMonth,lunarValue,lunarInfo)
+                        // Ordinary date
+                        // console.log("Set optional range",i,lunarYear,lunarMonth,lunarValue,lunarInfo)
                         let options = Object.assign(
                             {day: i,selected:false},
                             this.getLunarInfo(this.year,this.month+1,i),
@@ -561,7 +582,7 @@ export default {
                         temp[line].push(options)
                     }
                 }
-                // 到周六换行
+                // Wrap to Saturday
                 if (day == 6 && i < lastDateOfMonth) {
                     line++
                 }else if (i == lastDateOfMonth) {
@@ -576,13 +597,13 @@ export default {
                         ))
                         k++
                     }
-                    // 下个月除了补充的前几天开始的日期
+                    // The date starting next month in addition to the date of supplement
                     nextMonthPushDays=k
                 }
             } //end for
 
             // console.log(this.year+"/"+this.month+"/"+this.day+":"+line)
-            // 补充第六行让视觉稳定
+            // Supplement the sixth line to make the vision stable
             if(line<=5 && nextMonthPushDays>0){
                 // console.log({nextMonthPushDays:nextMonthPushDays,line:line})
                 for (let i = line+1; i<=5; i++) {
@@ -613,7 +634,7 @@ export default {
             }else{
                 value--
             }
-            // 用于显示目的（一般月份是从0开始的）
+            // For display purposes (the general month starts from 0)
             if(isString){
                 return value+1
             }
@@ -633,13 +654,13 @@ export default {
             }else{
                 value++
             }
-            // 用于显示目的（一般月份是从0开始的）
+            // For display purposes (the general month starts from 0)
             if(isString){
                 return value+1
             }
             return value
         },
-        // 获取农历信息
+        // Get lunar information
         getLunarInfo(y,m,d){
             let lunarInfo=calendar.solar2lunar(y,m,d)
             let lunarValue=lunarInfo.IDayCn
@@ -659,7 +680,7 @@ export default {
                 isGregorianFestival:isGregorianFestival,
             }
         },
-        // 获取自定义事件
+        // Get custom events
         getEvents(y,m,d){
             if(Object.keys(this.events).length==0)return false;
             let eventName=this.events[y+"-"+m+"-"+d]
@@ -669,7 +690,7 @@ export default {
             }
             return data
         },
-        // 上月
+        // last month
         prev(e) {
             e.stopPropagation()
             if (this.month == 0) {
@@ -682,7 +703,7 @@ export default {
             this.$emit('selectMonth',this.month+1,this.year)
             this.$emit('prev',this.month+1,this.year)
         },
-        //  下月
+        //  Next month
         next(e) {
             e.stopPropagation()
             if (this.month == 11) {
@@ -695,10 +716,10 @@ export default {
             this.$emit('selectMonth',this.month+1,this.year)
             this.$emit('next',this.month+1,this.year)
         },
-        // 选中日期
+        // Selected date
         select(k1, k2, e) {
             if (e != undefined) e.stopPropagation()
-                // 日期范围
+                // Date range
             if (this.range) {
                 if (this.rangeBegin.length == 0 || this.rangeEndTemp != 0) {
                     this.rangeBegin = [this.year, this.month,this.days[k1][k2].day]
@@ -709,12 +730,12 @@ export default {
                 } else {
                     this.rangeEnd = [this.year, this.month,this.days[k1][k2].day]
                     this.rangeEndTemp = 1
-                        // 判断结束日期小于开始日期则自动颠倒过来
+                        // Judging that the end date is less than the start date is automatically reversed
                     if (+new Date(this.rangeEnd[0], this.rangeEnd[1], this.rangeEnd[2]) < +new Date(this.rangeBegin[0], this.rangeBegin[1], this.rangeBegin[2])) {
                         this.rangeBegin = this.rangeEnd
                         this.rangeEnd = this.rangeBeginTemp
                     }
-                    // 小于10左边打补丁
+                    // Less than 10 left patch
                     let begin=[]
                     let end=[]
                     if(this.zero){
@@ -735,7 +756,7 @@ export default {
                 }
                 this.render(this.year, this.month)
             }else if (this.multi) {
-                // 如果已经选过则过滤掉
+                // Filtered if it has been selected
                 let filterDay=this.multiDays.filter(v => {
                   return this.year === v[0] && this.month === v[1]-1 && this.days[k1][k2].day === v[2]
                 })
@@ -749,7 +770,7 @@ export default {
                 this.days[k1][k2].selected = !this.days[k1][k2].selected
                 this.$emit('select',this.multiDays)
             } else {
-                // 取消上次选中
+                // Cancel last selected
                 if (this.today.length > 0) {
                     this.days.forEach(v=>{
                         v.forEach(vv=>{
@@ -757,7 +778,7 @@ export default {
                         })
                     })
                 }
-                // 设置当前选中天
+                // Set the currently selected day
                 this.days[k1][k2].selected = true
                 this.day = this.days[k1][k2].day
                 this.today = [k1, k2]
@@ -781,14 +802,14 @@ export default {
             this.render(this.year,this.month)
             this.$emit('selectYear',value)
         },
-        // 返回今天
+        // Return today
         setToday(){
             let now = new Date();
             this.year = now.getFullYear()
             this.month = now.getMonth()
             this.day = now.getDate()
             this.render(this.year,this.month)
-            // 遍历当前日找到选中
+            // Traversing the current day to find the selected
             this.days.forEach(v => {
                 let day=v.find(vv => {
                     return vv.day==this.day && !vv.disabled
@@ -799,7 +820,7 @@ export default {
                 
             })
         },
-        // 日期补零
+        // Date zero
         zeroPad(n){
             return String(n < 10 ? '0' + n : n)
         },

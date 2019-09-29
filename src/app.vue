@@ -2,14 +2,12 @@
 <div id="app">
     <div class="flex">
         <div>
-            <span>弹出框</span>
+            <span>Datepicker</span>
             <input type="text" @click="openByDrop($event)" v-model="calendar3.display" readonly>
-            <input type="text" @click="openMultiByDrop($event)" v-model="calendar5.display" readonly>
-            <input type="text" @click="openByDialog" :value="calendar4.display" readonly>
         </div>
 
         <div>
-            <span>单选/英文/事件</span>
+            <span>Kalender1</span>
             <calendar
                 ref="calendar1"
                 :events="calendar1.events" 
@@ -22,13 +20,11 @@
                 @select="calendar1.select"
                 @selectMonth="calendar1.selectMonth"
                 @selectYear="calendar1.selectYear"></calendar>
-            <button @click="changeEvents">异步更新Price</button>
-            <button @click="calendar1.value=[2018,1,Math.floor(Math.random()*30+1)]">动态设置日期</button>
             <button @click="$refs.calendar1.setToday()">返回今天</button>
         </div>
 
         <div>
-            <span>多选/农历</span>
+            <span>Kalender2</span>
             <calendar :range="calendar2.range" :lunar="calendar2.lunar" :value="calendar2.value" :begin="calendar2.begin" :end="calendar2.end" @select="calendar2.select"></calendar>
         </div>
     </div>
@@ -70,31 +66,33 @@ export default {
     data(){
         return {
             calendar1:{
-                value:[2017,7,20], //默认日期
+                value:[2019,9,27], //默认日期
                 // lunar:true, //显示农历
-                weeks:['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-                months:['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                // weeks:['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'],
+                months:['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
+                lunar:false,
                 events:{
-                    '2017-7-7':'$408',
-                    '2017-7-20':'$408',
-                    '2017-7-21':'$460',
-                    '2017-7-22':'$500',
+                    '2019-9-7':'geschl.',
+                    '2019-9-20':'13-18Uhr',
+                    '2019-9-21':'13-18Uhr',
+                    '2019-9-22':'10.30-18Uhr',
                 },
                 select(value){
-                    console.log(value.toString());
+                    console.log(`select: ${value.toString()}`);
                 },
                 selectMonth(month,year){
-                    console.log(year,month)
+                    console.log(`selectMonth: ${year,month}`);
                 },
                 selectYear(year){
-                    console.log(year)
+                    console.log(`selectYear: ${year}`);
                 },
                 timestamp:Date.now()
             },
             calendar2:{
                 range:true,
                 value:[[2017,12,1],[2019,2,16]], //默认日期
-                lunar:true, //显示农历
+                // lunar:true, //显示农历
+                lunar:false, //显示农历
                 begin:[2017,2,16], //可选开始日期
                 end:[2019,2,16], //可选结束日期
                 select(begin,end){
